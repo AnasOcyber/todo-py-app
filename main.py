@@ -37,26 +37,40 @@ def add_task():
 def mark_completed():
     task_id = int(input("Id: "))
     for task in all_tasks:
-        if all_tasks != []:
-            if task.id == task_id:
-                task.status = "completed"
-                print("Status changed!")
-                print(f"Completed in {
-                      (datetime.now() - task.start_time)} time")
-        else:
-            print(f"We couldn't find task with '{task_id}' id\n")
+        if task.id == task_id:
+            task.status = "completed"
+            print("Status changed!")
+            print(f"Completed in {
+                (datetime.now() - task.start_time)} time\n")
+            return
+
+    else:
+        print(f"We couldn't find task with '{task_id}' id\n")
+
+
+def delete_task():
+    task_id = int(input("Id: "))
+    for task in all_tasks:
+        if task.id == task_id:
+            all_tasks.remove(task)
+            print("Task deleted successfully.\n")
+            return
+
+    else:
+        print(f"We couldn't find task with '{task_id}' id\n")
 
 
 def show_menu():
     print("1. Add Task")
     print("2. View Tasks")
     print("3. Mark Task as Completed")
-    print("4. Quit")
+    print("4. Delete Task")
+    print("5. Quit")
 
 
 all_tasks = []
 choice = 0
-while choice != 4:
+while choice != 5:
     show_menu()
     choice = int(input("\nChoice: "))
 
@@ -68,6 +82,10 @@ while choice != 4:
 
     elif choice == 3:
         mark_completed()
+
+    elif choice == 4:
+        delete_task()
+
     else:
         print("Bad choice!\n")
 
