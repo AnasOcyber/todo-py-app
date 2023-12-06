@@ -60,17 +60,31 @@ def delete_task():
         print(f"We couldn't find task with '{task_id}' id\n")
 
 
+def edit_task():
+    task_id = int(input("Id: "))
+    for task in all_tasks:
+        if task.id == task_id:
+            task_desc = input("Description: ")
+            task.description = task_desc
+            print("Description changed successfully.\n")
+            return
+
+    else:
+        print(f"We couldn't find task with '{task_id}' id\n")
+
+
 def show_menu():
     print("1. Add Task")
     print("2. View Tasks")
     print("3. Mark Task as Completed")
     print("4. Delete Task")
-    print("5. Quit")
+    print("5. Edit Task Description")
+    print("6. Quit")
 
 
 all_tasks = []
 choice = 0
-while choice != 5:
+while choice != 6:
     show_menu()
     choice = int(input("\nChoice: "))
 
@@ -85,6 +99,9 @@ while choice != 5:
 
     elif choice == 4:
         delete_task()
+
+    elif choice == 5:
+        edit_task()
 
     else:
         print("Bad choice!\n")
